@@ -2,7 +2,7 @@ import React from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import "./Home.css";
 
-const heroImages = ["/images/pharmacy-3.png", "/images/pharmacy-1.png"];
+//const heroImages = ["/images/pharmacy-3.png", "/images/pharmacy-1.png"];
 const landingTabs = ["Home", "About Us", "Services", "Contact Us"];
 const serviceCards = [
   {
@@ -56,8 +56,8 @@ function LogoMark({ small = false }) {
 function Home() {
   const [activeTab, setActiveTab] = useState("Home");
   const [darkMode, setDarkMode] = useState(true);
-  const [heroIndex, setHeroIndex] = useState(0);
-  const [heroVisible, setHeroVisible] = useState(true);
+  // const [heroIndex, setHeroIndex] = useState(0);
+  // const [heroVisible, setHeroVisible] = useState(true);
   const [reduceMotion, setReduceMotion] = useState(false);
   const [authOpen, setAuthOpen] = useState(false);
   const [step, setStep] = useState("login");
@@ -107,33 +107,33 @@ function Home() {
     return () => media.removeEventListener?.("change", update);
   }, []);
 
-  const switchImage = useCallback(
-    (index) => {
-      if (index === heroIndex) return;
-      window.clearTimeout(switchTimer.current);
-      if (reduceMotion) {
-        setHeroIndex(index);
-        return;
-      }
-      setHeroVisible(false);
-      switchTimer.current = window.setTimeout(() => {
-        setHeroIndex(index);
-        requestAnimationFrame(() => setHeroVisible(true));
-      }, 400);
-    },
-    [heroIndex, reduceMotion],
-  );
+  // const switchImage = useCallback(
+  //   (index) => {
+  //     if (index === heroIndex) return;
+  //     window.clearTimeout(switchTimer.current);
+  //     if (reduceMotion) {
+  //       setHeroIndex(index);
+  //       return;
+  //     }
+  //     setHeroVisible(false);
+  //     switchTimer.current = window.setTimeout(() => {
+  //       setHeroIndex(index);
+  //       requestAnimationFrame(() => setHeroVisible(true));
+  //     }, 400);
+  //   },
+  //   [heroIndex, reduceMotion],
+  // );
 
-  useEffect(() => {
-    carouselTimer.current = window.setTimeout(
-      () => switchImage((heroIndex + 1) % heroImages.length),
-      6000,
-    );
-    return () => {
-      window.clearTimeout(carouselTimer.current);
-      window.clearTimeout(switchTimer.current);
-    };
-  }, [heroIndex, reduceMotion, switchImage]);
+  // useEffect(() => {
+  //   carouselTimer.current = window.setTimeout(
+  //     () => switchImage((heroIndex + 1) % heroImages.length),
+  //     6000,
+  //   );
+  //   return () => {
+  //     window.clearTimeout(carouselTimer.current);
+  //     window.clearTimeout(switchTimer.current);
+  //   };
+  // }, [heroIndex, reduceMotion, switchImage]);
 
   useEffect(() => {
     const sectionElements = landingTabs
@@ -407,18 +407,60 @@ function Home() {
 
         {step === "signup" && (
           <form onSubmit={handleSignup} noValidate>
-            <label className="home-field-label" htmlFor="auth-full-name">Full Name</label>
-            <input id="auth-full-name" className="home-modal-input" autoComplete="name" placeholder="Enter your full name" value={fullName} onChange={(event) => setFullName(event.target.value)} />
-            <label className="home-field-label" htmlFor="auth-signup-email">Email Address</label>
-            <input id="auth-signup-email" className="home-modal-input" type="email" autoComplete="email" placeholder="Enter your email" value={email} onChange={(event) => setEmail(event.target.value)} />
-            <label className="home-field-label" htmlFor="auth-account-type">Account Type</label>
-            <select id="auth-account-type" className="home-modal-input home-account-select" value={accountType} onChange={(event) => setAccountType(event.target.value)}>
+            <label className="home-field-label" htmlFor="auth-full-name">
+              Full Name
+            </label>
+            <input 
+              id="auth-full-name" 
+              className="home-modal-input" 
+              autoComplete="name" 
+              placeholder="Enter your full name" 
+              value={fullName} 
+              onChange={(event) => setFullName(event.target.value)}
+            />
+
+            <label className="home-field-label" htmlFor="auth-signup-email">
+              Email Address
+            </label>
+            <input 
+              id="auth-signup-email" 
+              className="home-modal-input" 
+              type="email" 
+              autoComplete="email" 
+              placeholder="Enter your email" 
+              value={email} 
+              onChange={(event) => setEmail(event.target.value)}
+            />
+            <label className="home-field-label" htmlFor="auth-account-type">
+              Account Type
+            </label>
+            <select 
+              id="auth-account-type" 
+              className="home-modal-input home-account-select"
+              value={accountType} 
+              onChange={(event) => setAccountType(event.target.value)}
+            >
               {accountTypes.map((type) => <option key={type}>{type}</option>)}
             </select>
+
             <label className="home-field-label" htmlFor="auth-signup-password">Password</label>
             <div className="home-password-wrap">
-              <input id="auth-signup-password" className="home-modal-input" type={showNewPassword ? "text" : "password"} autoComplete="new-password" placeholder="Create a password" value={newPassword} onChange={(event) => setNewPassword(event.target.value)} />
-              <button type="button" className="home-password-toggle" onClick={() => setShowNewPassword((value) => !value)} aria-label={showNewPassword ? "Hide password" : "Show password"}>{showNewPassword ? "Hide" : "Show"}</button>
+              <input 
+                id="auth-signup-password" 
+                className="home-modal-input" 
+                type={showNewPassword ? "text" : "password"} 
+                autoComplete="new-password" 
+                placeholder="Create a password" 
+                value={newPassword} 
+                onChange={(event) => setNewPassword(event.target.value)} 
+              />
+              <button type="button" 
+              className="home-password-toggle"
+                onClick={() => setShowNewPassword((value) => !value)} 
+                aria-label={showNewPassword ? "Hide password" : "Show password"}
+                >
+                {showNewPassword ? "Hide" : "Show"}
+                </button>
             </div>
             {renderPasswordRequirements()}
             <label className="home-field-label" htmlFor="auth-confirm-password">Confirm Password</label>
@@ -534,14 +576,14 @@ function Home() {
       </header>
 
       <section className="home-hero" id="home" aria-label="Welcome to MEDICARE">
-        <img className={`home-hero-image${heroVisible ? " is-visible" : ""}`} src={heroImages[heroIndex]} alt="" aria-hidden="true" />
+        {/* <img className={`home-hero-image${heroVisible ? " is-visible" : ""}`} src={heroImages[heroIndex]} alt="" aria-hidden="true" /> */}
         <div className="home-hero-overlay" aria-hidden="true" />
         <div className="home-hero-inner">
           <div className="home-hero-copy">
             <h1>Next-Gen Medicine<br /><span>Shop Management</span></h1>
             <p>Streamline medicine billing, verified inventory tracking, expiry monitoring, and real-time pharmacy operations with intelligent precision.</p>
             <button className="home-get-started" type="button" onClick={openLogin}>Get Started <span aria-hidden="true">→</span></button>
-            <div className="home-carousel-bar" aria-label={`Hero image ${heroIndex + 1} of ${heroImages.length}`}>
+            {/* <div className="home-carousel-bar" aria-label={`Hero image ${heroIndex + 1} of ${heroImages.length}`}>
               <span>VIEW:</span>
               <div className="home-carousel-dots">
                 {heroImages.map((image, index) => (
@@ -549,7 +591,7 @@ function Home() {
                 ))}
               </div>
               <span className="home-carousel-count">0{heroIndex + 1} / 0{heroImages.length}</span>
-            </div>
+            </div> */}
           </div>
         </div>
       </section>
