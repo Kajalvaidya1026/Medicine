@@ -109,6 +109,7 @@
 }
 
 .home-logo-mark-small {
+  display: grid;
   width: 54px;
   height: 54px;
   margin: 0 auto 15px;
@@ -655,6 +656,7 @@
   inset: 0;
   display: grid;
   overflow-y: auto;
+  scrollbar-width: none;
   place-items: center;
   padding: 22px 14px;
   background: rgba(1, 9, 13, 0.72);
@@ -663,11 +665,17 @@
   animation: home-fade-in 170ms ease both;
 }
 
+.home-modal-backdrop::-webkit-scrollbar,
+.home-auth-dialog::-webkit-scrollbar {
+  display: none;
+}
+
 .home-auth-dialog {
   position: relative;
   width: min(100%, 458px);
   max-height: min(90vh, 860px);
   overflow-y: auto;
+  scrollbar-width: none;
   padding: 37px 36px 31px;
   border: 1px solid rgba(56, 189, 248, 0.2);
   border-radius: 23px;
