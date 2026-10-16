@@ -9,6 +9,8 @@ import PasswordInput from "../../components/auth/PasswordInput.jsx";
 import PasswordRequirements from "../../components/auth/PasswordRequirements.jsx";
 import PrimaryButton from "../../components/auth/PrimaryButton.jsx";
 
+
+
 const PUBLIC_ROLES = ["Customer", "Supplier", "Doctor"];
 const ROLE_IDS = { Customer: 1, Supplier: 2, Doctor: 3 };
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
